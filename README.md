@@ -1,4 +1,4 @@
-# smart-background
+# smartBackground
 
 ## Project setup
 ```
