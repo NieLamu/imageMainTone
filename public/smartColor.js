@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 /* eslint-disable no-console */
 const smartColor = async (img, filterWhite = true) => {
     if (!img) return;
@@ -47,7 +48,8 @@ const smartColor = async (img, filterWhite = true) => {
             b = data[offset + 2];
             a = data[offset + 3];
             // If pixel is mostly opaque and not white
-            if (filterWhite && a >= 125 && !(r > 250 && g > 250 && b > 250)) {
+            if (filterWhite && (r > 250 || g > 250 || b > 250 || a<0.5)) {
+            } else {
                 rgba.r += r;
                 rgba.g += g;
                 rgba.b += b;
