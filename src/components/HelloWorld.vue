@@ -1,32 +1,12 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="hello" :style="mainStyle">
+    <img id="image" :src="imgSrc" @click="changeImg">
+    <div class="infoWrapper">
+      <div class="info">
+        <input class="upload" id="uploadImg" type="file" @change="uploadImg">
+        <button class="upload">Upload Your Image</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -35,24 +15,71 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      mainStyle: {
+        'background-color': '#376473',
+        'text-align': 'center'
+      },
+      imgSrc: ''
+    }
+  },
+  mounted () {
+    this.changeImg();
+  },
+  methods: {
+    changeImg: function () {
+      const i = parseInt((Math.random()*1000+1));
+      this.imgSrc = `https://picsum.photos/600/600/?image=${i}`
+    },
+    uploadImg: function () {
+      
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style scoped lang="less">
+.hello {
+  padding: 10px;
+  height: 100%; 
+
+  .infoWrapper {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+
+    .info {
+      position: relative;
+      width: 200px;
+      height: 40px;
+    }
+    .upload {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgb(9, 19, 35);
+      border-radius: 20px;
+      color: white;
+    }
+    #uploadImg {
+      opacity: 0;
+      z-index: 1;
+      cursor: pointer;
+    }
+  }
+  
+  #image {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
