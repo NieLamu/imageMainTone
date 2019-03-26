@@ -1,3 +1,3 @@
 module.exports = {
-    'publicPath': '/smartBackground/dist/'
+    'publicPath': ''
 }
