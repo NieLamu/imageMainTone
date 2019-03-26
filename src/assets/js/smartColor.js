@@ -1,5 +1,4 @@
 /* eslint-disable no-empty */
-/* eslint-disable no-console */
 const smartColor = async (img, filterWhite = true) => {
     if (!img) return;
     let image;
@@ -63,4 +62,9 @@ const smartColor = async (img, filterWhite = true) => {
         return rgba
     }
     
+}
+
+// https://www.cnblogs.com/webSong/p/8405737.html
+export {
+    smartColor
 }

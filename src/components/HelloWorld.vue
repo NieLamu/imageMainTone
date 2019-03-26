@@ -1,19 +1,35 @@
 <template>
   <div class="hello" :style="mainStyle">
-    <img id="image" :src="imgSrc" @click="changeImg" crossOrigin="Anonymous">
+    <img id="image" :src="imgSrc" crossOrigin="Anonymous" v-show="!loading" @click="changeImg">
+    <div class="loader" v-show="loading">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
     <div class="contentWrapper">
-      <div class="info" :style="mainStyle">
+      <div class="info">
+        Try click the picture
+      </div>
+      <div class="colorInfo" :style="mainStyle">
         {{ mainStyle.backgroundColor }}
       </div>
       <div class="uploadWrapper">
-        <button class="upload">Upload Your Image</button>
+        <button class="upload">UPLOAD YOUR PICTURE</button>
         <input class="upload" id="uploadImg" type="file" accept="image/*" @change="uploadImg">
       </div>
+      <a href="https://github.com/NieLamu/smartBackground" target="_blank" title="smartBackground">
+        <i class="icon ion-logo-github"></i>
+      </a>
     </div>
   </div>
 </template>
 
 <script>
+import '../assets/css/loading.css'
+import { smartColor } from '../assets/js/smartColor'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -24,7 +40,8 @@ export default {
       mainStyle: {
         backgroundColor: '#42b983'
       },
-      imgSrc: ''
+      imgSrc: '',
+      loading: true
     }
   },
   mounted () {
@@ -33,20 +50,22 @@ export default {
   },
   methods: {
     changeImg: function () {
+      this.loading = true;
       const i = parseInt((Math.random()*1000+1));
       this.imgSrc = `https://picsum.photos/1024/?image=${i}`;
     },
     uploadImg: function () {
       const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = () => {
         const b64 = reader.result;
         this.imgSrc = b64;
       }  
       reader.readAsDataURL(document.getElementById('uploadImg').files[0])
     },
-    imageOnload: function (params) {
+    imageOnload: function () {
       const image = document.getElementById('image');
       image.onload = () => {
+        this.loading = false;
         smartColor(image).then(rgba => {
           const rgb = `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})`;
           this.mainStyle.backgroundColor = rgb; 
@@ -62,7 +81,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .hello {
-  padding: 10px;
+  // padding: 30px;
   height: 100%; 
   text-align: center;
 
@@ -70,23 +89,31 @@ export default {
     position: absolute;
     width: 100%;
     left: 0;
-    bottom: 20px;
-
+    bottom: .625rem;
     .info {
       position: relative;
-      margin: 0 auto 10px;
-      width: 200px;
-      height: 40px;
-      border-radius: 20px;
-      border: solid 0.5px #42b983;
-      line-height: 40px;
+      margin: 0 auto .625rem;
+      width: 100%;
+      height: 2.5rem;
+      border-radius: 1.25rem;
+      line-height: 2.5rem;
+      color: white;
+    }
+    .colorInfo {
+      position: relative;
+      margin: 0 auto .625rem;
+      width: 12.5rem;
+      height: 2.5rem;
+      border-radius: 1.25rem;
+      border: solid .03125rem #42b983;
+      line-height: 2.5rem;
       color: white;
     }
     .uploadWrapper {
       position: relative;  
       margin: 0 auto;
-      width: 200px;
-      height: 40px;
+      width: 12.5rem;
+      height: 2.5rem;
       .upload {
         position: absolute;
         left: 0;
@@ -94,14 +121,21 @@ export default {
         width: 100%;
         height: 100%;
         background: #42b983;
-        border: solid 0.5px #42b983;
-        border-radius: 20px;
+        border: solid .03125rem #42b983;
+        border-radius: 1.25rem;
         color: white;
       }
       #uploadImg {
         opacity: 0;
         cursor: pointer;
       }
+    }
+    .icon {
+      font-size: 2rem;
+      color: black;
+    }
+    .icon:hover {
+      color: white;
     }
     
   }
