@@ -1,5 +1,10 @@
 # smartBackground
 
+## Introduction
+
+A demo using main color of a picture as background and `theme-color` meta.
+Visit [smartBackground](https://github.com/NieLamu/smartBackground/dist) for preview.
+
 ## Project setup
 ```
 npm install
