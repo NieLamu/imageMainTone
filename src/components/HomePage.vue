@@ -31,7 +31,7 @@ import '../assets/css/loading.css'
 import { smartColor } from '../assets/js/smartColor'
 
 export default {
-  name: 'HelloWorld',
+  name: 'HomePage',
   props: {
     msg: String
   },
