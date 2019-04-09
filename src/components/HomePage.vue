@@ -1,6 +1,6 @@
 <template>
   <div class="hello" :style="mainStyle">
-    <img id="image" :src="imgSrc" crossOrigin="Anonymous" v-show="!loading" @click="changeImg">
+    <img id="image" :src="imgSrc" crossorigin="Anonymous" v-show="!loading" @click="changeImg">
     <div class="loader" v-show="loading">
       <div class="dot"></div>
       <div class="dot"></div>
@@ -9,12 +9,8 @@
       <div class="dot"></div>
     </div>
     <div class="contentWrapper">
-      <div class="info">
-        Try click the picture
-      </div>
-      <div class="colorInfo" :style="mainStyle">
-        {{ mainStyle.backgroundColor }}
-      </div>
+      <div class="info">Try click the picture</div>
+      <div class="colorInfo" :style="mainStyle">{{ mainStyle.backgroundColor }}</div>
       <div class="uploadWrapper">
         <button class="upload">UPLOAD YOUR PICTURE</button>
         <input class="upload" id="uploadImg" type="file" accept="image/*" @change="uploadImg">
@@ -27,72 +23,74 @@
 </template>
 
 <script>
-import '../assets/css/loading.css'
-import { smartColor } from '../assets/js/smartColor'
+import "../assets/css/loading.css";
+import { imageMainTone } from "../assets/js/imageMainTone";
 
 export default {
-  name: 'HomePage',
+  name: "HomePage",
   props: {
     msg: String
   },
-  data () {
+  data() {
     return {
       mainStyle: {
-        backgroundColor: '#42b983'
+        backgroundColor: "#42b983"
       },
-      imgSrc: '',
+      imgSrc: "",
       loading: true
-    }
+    };
   },
-  mounted () {
+  mounted() {
     this.imageOnload();
     this.changeImg();
   },
   methods: {
-    changeImg: function () {
+    changeImg: function() {
       this.loading = true;
-      const i = parseInt((Math.random()*1000+1));
+      const i = parseInt(Math.random() * 1000 + 1);
       this.imgSrc = `https://picsum.photos/1024/?image=${i}`;
     },
-    uploadImg: function () {
+    uploadImg: function() {
       const reader = new FileReader();
-        reader.onload = () => {
+      reader.onload = () => {
         const b64 = reader.result;
         this.imgSrc = b64;
-      }  
-      reader.readAsDataURL(document.getElementById('uploadImg').files[0])
+      };
+      reader.readAsDataURL(document.getElementById("uploadImg").files[0]);
     },
-    imageOnload: function () {
-      const image = document.getElementById('image');
+    imageOnload: function() {
+      const image = document.getElementById("image");
       image.onload = () => {
         this.loading = false;
-        smartColor(image).then(rgba => {
+        imageMainTone(image).then(rgba => {
           const rgb = `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})`;
-          this.mainStyle.backgroundColor = rgb; 
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', rgb);
-        })
-      }
+          this.mainStyle.backgroundColor = rgb;
+          document
+            .querySelector('meta[name="theme-color"]')
+            .setAttribute("content", rgb);
+        });
+      };
       image.onerror = this.changeImg;
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .hello {
   // padding: 30px;
-  height: 100%; 
+  height: 100%;
   text-align: center;
 
   .contentWrapper {
     position: absolute;
     width: 100%;
     left: 0;
-    bottom: .625rem;
+    bottom: 0.625rem;
     .info {
       position: relative;
-      margin: 0 auto .625rem;
+      margin: 0 auto 0.625rem;
       width: 100%;
       height: 2.5rem;
       border-radius: 1.25rem;
@@ -101,16 +99,16 @@ export default {
     }
     .colorInfo {
       position: relative;
-      margin: 0 auto .625rem;
+      margin: 0 auto 0.625rem;
       width: 12.5rem;
       height: 2.5rem;
       border-radius: 1.25rem;
-      border: solid .03125rem #42b983;
+      border: solid 0.03125rem #42b983;
       line-height: 2.5rem;
       color: white;
     }
     .uploadWrapper {
-      position: relative;  
+      position: relative;
       margin: 0 auto;
       width: 12.5rem;
       height: 2.5rem;
@@ -121,7 +119,7 @@ export default {
         width: 100%;
         height: 100%;
         background: #42b983;
-        border: solid .03125rem #42b983;
+        border: solid 0.03125rem #42b983;
         border-radius: 1.25rem;
         color: white;
       }
@@ -137,7 +135,6 @@ export default {
     .icon:hover {
       color: white;
     }
-    
   }
 
   #image {
@@ -145,5 +142,4 @@ export default {
     max-width: 100%;
   }
 }
-
 </style>

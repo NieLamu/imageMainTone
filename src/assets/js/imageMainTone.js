@@ -1,5 +1,5 @@
 /* eslint-disable no-empty */
-const smartColor = async (img, filterWhite = true) => {
+const imageMainTone = async (img, filterWhite = true) => {
     if (!img) return;
     let image;
     if (typeof img === 'string') {
@@ -10,7 +10,7 @@ const smartColor = async (img, filterWhite = true) => {
     }
     const rgba = getMainColor(image, filterWhite);
     return rgba;
-    
+
     function loadImage(img) { // img src
         return new Promise((resolve, reject) => {
             // Create an image element
@@ -47,7 +47,7 @@ const smartColor = async (img, filterWhite = true) => {
             b = data[offset + 2];
             a = data[offset + 3];
             // If pixel is mostly opaque and not white
-            if (filterWhite && (r > 250 || g > 250 || b > 250 || a<0.5)) {
+            if (filterWhite && (r > 250 || g > 250 || b > 250 || a < 0.5)) {
             } else {
                 rgba.r += r;
                 rgba.g += g;
@@ -61,10 +61,10 @@ const smartColor = async (img, filterWhite = true) => {
         }
         return rgba
     }
-    
+
 }
 
 // https://www.cnblogs.com/webSong/p/8405737.html
 export {
-    smartColor
+    imageMainTone
 }
