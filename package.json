@@ -1,24 +1,44 @@
 {
-  "name": "smartBackground",
+  "name": "imageMainTone",
   "version": "1.0.0",
-  "private": true,
+  "description": "get main tone of a picture.",
+  "main": "index.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:npm": "babel src/assets/js/imageMainTone.js -o index.js --config-file ./npm.babelrc",
+    "prepublish": "yarn run build:npm",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NieLamu/imageMainTone"
+  },
+  "keywords": [
+    "main tone"
+  ],
+  "author": "NieLamu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NieLamu/imageMainTone/issues"
+  },
+  "homepage": "https://NieLamu.github.io/imageMainTone/dist/",
   "dependencies": {
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
     "vue": "^2.6.6"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
