@@ -15,7 +15,7 @@
         <button class="upload">UPLOAD YOUR PICTURE</button>
         <input class="upload" id="uploadImg" type="file" accept="image/*" @change="uploadImg">
       </div>
-      <a href="https://github.com/NieLamu/smartBackground" target="_blank" title="smartBackground">
+      <a href="https://github.com/NieLamu/imageMainTone" target="_blank" title="imageMainTone">
         <i class="icon ion-logo-github"></i>
       </a>
     </div>

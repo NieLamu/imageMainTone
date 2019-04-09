@@ -1,9 +1,9 @@
-# smartBackground
+# imageMainTone
 
 ## Introduction
 
 A demo using main color of a picture as background and `theme-color` meta.
-Visit [smartBackground demo](https://NieLamu.github.io/smartBackground/dist/) for preview.
+Visit [imageMainTone demo](https://NieLamu.github.io/imageMainTone/dist/) for preview.
 
 ## Project setup
 ```
