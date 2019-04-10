@@ -38,7 +38,7 @@ const imageMainTone = async (img, filterWhite = true) => {
         } catch (e) {
             return;
         }
-        let rgba = { r: 0, g: 0, b: 0, a: 0, pixels: 0 };
+        let rgba = { r: 0, g: 0, b: 0, a: 0 }, pixels = 0;
         const len = data.length;
         for (let i = 0, offset, r, g, b, a; i < len / 4; i++) {
             offset = i * 4;
@@ -53,11 +53,11 @@ const imageMainTone = async (img, filterWhite = true) => {
                 rgba.g += g;
                 rgba.b += b;
                 rgba.a += a;
-                rgba.pixels++;
+                pixels++;
             }
         }
         for (let i in rgba) {
-            rgba[i] = parseInt(rgba[i] / rgba.pixels);
+            rgba[i] = parseInt(rgba[i] / pixels);
         }
         return rgba
     }
